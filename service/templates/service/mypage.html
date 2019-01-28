@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+{% if user.is_authenticated %}
+
+{% if save_message %}
+  <div class="alert alert-success">
+      <div class="container">
+        <div class="alert-icon">
+          <i class="material-icons">check</i>
+        </div>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true"><i class="material-icons">clear</i></span>
+        </button>
+        {{ save_message }}}
+      </div>
+    </div>
+{% elif remove_message %}
+<div class="alert alert-warning">
+  <div class="container">
+    <div class="alert-icon">
+      <i class="material-icons">remove</i>
+    </div>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true"><i class="material-icons">clear</i></span>
+    </button>
+    {{ remove_message }}
+  </div>
+</div>
+{% endif %}
+
+<div class="container text-center text-light lead my-5">
+  <h2>- My Page -</h2>
+</div>
+<div class="container text-center rounded lead my-5" style="border: 1px solid rgb(255, 222, 34);">
+  <div class="container">
+      <h3 style="color:rgb(255, 222, 34);">Your Saved Items</h3>
+  </div>
+  <hr>
+  <div class="container my-5">
+      <div class="row">
+              {% for item in saved_item %}
+              <div class="col-md-4 px-2">
+                      <a href="{{ item.title_link }}" target="_blank">
+                        <div class="card card-testimonial card-hover" style="border:2px solid rgb(255, 222, 34);">
+                              <div class="card-body p-2 align-middle" style="height:256px;"><br>
+                                  <u><span class="">{{ item.date_title | truncatechars:"20" }} </span></u>
+                                  <span style="position:absolute;left:10px;top:5px;color:rgb(78, 78, 78);"><b> <i class="material-icons rounded-circle" style="border:2px solid rgb(255,230,0);background:rgb(78, 78, 78);">fiber_manual_record</i> </b></span>
+                                  <div class="card-description text-left m-3">
+                                    <h4 class="text-dark mark"><b>{{ item.title }}</b></h4>
+                                  </div>
+                              </div>
+                          </div></a>   
+                          <form method="POST" enctype="multipart/form-data" action="">
+                              {% csrf_token %}
+                              <input type="hidden" value="{{ item.title }}" name="del_item_title">
+                              <input type="hidden" value="{{ item.title_link }}" name="del_item_link">
+                              <input type="hidden" value="{{ item.date_title }}" name="del_item_date_title">
+                              <button name="remove" type='submit' style="position:absolute;right:18px;bottom:30px;;" class="border border-grey btn btn-danger rounded p-2"><b class="text-light p-1">remove<i class="material-icons p-1 text-light">remove</i> </b></span>
+                              </form>                         
+                              <!-- <a href="#"><span style="position:absolute;right:15px;bottom:36px;" class="border border-grey bg bg-danger rounded"><b class="text-light p-1">saved<i class="material-icons p-1 text-light">done</i> </b></span></a> -->
+                              <button type='button' style="position:absolute;right:120px;bottom:30px;;" class="border border-grey btn btn-info rounded p-2 dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <b class="text-light p-1">share<i class="material-icons p-1 text-light">share</i> </b></button>
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                      <a class="dropdown-item" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ item.title_link }}">Facebook</a>
+                                      <a class="dropdown-item" target="_blank" href="https://twitter.com/intent/tweet?url=http%3A//{{ item.title_link }}">Twitter</a>
+                                    </div>
+              </div>
+              {% endfor %}
+      </div>
+  </div>
+
+<div class="border d-inline-block px-3 py-1 mb-3 rounded bg bg-light">
+<!-- 前へ の部分 -->
+{% if saved_item.has_previous %}
+<a class="text-primary px-2" href="?page={{ saved_item.previous_page_number }}">前へ</a>
+{% endif %}
+
+<!-- 数字の部分 -->
+{% for num in saved_item.paginator.page_range %}
+{% if saved_item.number == num %}
+    <span class="text-dark px-2">{{ num }}</span>
+{% else %}
+    <a class="text-primary px-2" href="?page={{ num }}"><b>{{ num }}</b></a>
+{% endif %}
+{% endfor %}
+
+<!-- 次へ の部分 -->
+{% if saved_item.has_next %}
+<a class="text-primary px-2" href="?page={{ saved_item.next_page_number }}">次へ</a>
+{% endif %}
+</div>
+
+</div>  <!-- content bordered with yellow line -->
+
+{% else %}
+<div class="container">
+<h2 class="info text-light">
+It seems like you don't have your account...
+</h2>
+<div class="container text-center">
+<a href="{% url 'login' %}"><button class="btn btn-info rounded p-2 mx-1"><b class="text-light lead">Log In</b></button></a>
+                <a href="{% url 'signup' %}"><button class="btn btn-warning rounded p-2 mx-1"><b class="text-light lead">Sign Up</b></button></a>
+</div>
+</div>
+<br><br>
+{% endif %}
+{% endblock %}

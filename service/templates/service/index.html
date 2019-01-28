@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+
+
+      <div class="page-header header-filter clear-filter" data-parallax="true" style="background-image: url('./static/assets/img/lamp.jpeg');">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 ml-auto mr-auto">
+              <div class="brand text-center">
+                <h1>
+                  <span class="pro-badge">
+                    <b>sclamp</b>
+                  </span>
+                </h1>
+                        
+                        <div class="container">
+                          <div class="">
+                                <form method="POST" action="{% url 'result' %}" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                        <input type="text" name="keywords" class="rounded w-75 p-1" placeholder="any words you like for news & websites">
+                                        <button type="submit" class="rounded text-warning border border-light bg bg-warning btn align-middle p-2" style="margin:-2px;"><i class="material-icons align-middle" style="color:rgb(95, 95, 95);">search</i></button>
+                                    </form>
+                          </div>
+                          <div class="container">
+                            <a href="{% url 'about' %}"><button type="button" class="btn btn-secondary rounded mt-0">About sclamp</button></a>
+                          </div>
+                         
+                        </div>
+                      </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      
+      <div class="main main-raised" style="background-color:rgb(78, 78, 78);">
+        <br>
+        
+        
+        
+        <div class="container text-center">
+            <h2 style="border-bottom: 1px solid rgb(255, 222, 34);color:rgb(255, 222, 34);"><small class="" style="color:rgb(255, 222, 34);">Randomly Picked News</small><i class="material-icons p-1">list_alt</i> </h2><i class="material-icons" style="color:rgb(255, 222, 34);">grain</i>
+        </div><br>
+        <div class="container mx-auto">
+        <div class="row">
+            
+            {% for n in news %}
+                <div class="col-md-4 my-0">
+                  
+                                <a href="{{ n.1 }}" target="_blank"><div class="card card-testimonial card-hover" style="border:1px solid rgb(255, 208, 0);">
+                                <div class="card-body p-2 align-middle" style="height:256px;"><br>
+                                    <span class=""><u>{{ n.3 | truncatechars:"20"}}</u></span>
+                                    
+                                    <span class="" style="position:absolute;left:10px;top:5px;color: rgb(78,78,78);"><b> <i class="material-icons">fiber_manual_record</i> </b></span>
+                                    <div class="card-description text-left m-3"><h4 class="mark rounded" style="color:rgba(65, 52, 39, 0.904);"><b>{{ n.0 }}</b></h4></div>
+                                </div>
+                            </div></a>
+                            <a href="{{ n.5 }}" target="_blank"><span class="rounded px-1 border border-dark btn btn-secondary py-1 " style="position:absolute;right:20px;top:30px;">{{ n.2 }}</span></a>
+                            {% if user.is_authenticated %}
+                            <form method="POST" enctype="multipart/form-data" action="{% url 'mypage' %}" target="_blank">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{ n.0 }}" name="item_title">
+                                <input type="hidden" value="{{ n.1 }}" name="item_link">
+                                <input type="hidden" value="{{ n.2 }}" name="item_keyword">
+                                <input type="hidden" value="{{ n.6 }}" name="item_date_title">
+                                <input type="hidden" value="{{ n.5 }}" name="item_keyword_link">
+                                <button name="save" type='submit' style="position:absolute;right:18px;bottom:30px;" class="btn btn-warning rounded p-2 border border-grey"><b class="text-light p-1">save<i class="material-icons p-1 text-light">present_to_all</i> </b></button>                       
+                                </form>
+                              
+                          <button type='button' style="position:absolute;right:105px;bottom:30px;;" class="border border-grey btn btn-info rounded p-2 dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <b class="text-light p-1">share<i class="material-icons p-1 text-light">share</i> </b></button>
+                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                      <a class="dropdown-item" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ n.1 }}">Facebook</a>
+                                      <a class="dropdown-item" target="_blank" href="https://twitter.com/intent/tweet?url=http%3A//{{ n.1 }}">Twitter</a>
+                                    </div>
+                                  
+                                
+                            
+                            {% else %}
+                            <button type='button' style="position:absolute;right:18px;bottom:30px;;" class="border border-grey btn btn-info rounded p-2 dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <b class="text-light p-1">share<i class="material-icons p-1 text-light">share</i> </b></button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ n.1 }}">Facebook</a>
+                                    <a class="dropdown-item" target="_blank" href="https://twitter.com/intent/tweet?url=http%3A//{{ n.1 }}">Twitter</a>
+                                  </div>
+                            <!-- <a href="#"><span style="position:absolute;right:15px;bottom:36px;" class="border border-grey bg bg-danger rounded"><b class="text-light p-1">saved<i class="material-icons p-1 text-light">done</i> </b></span></a> -->
+                            {% endif %}
+                            
+                            
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+        <br>
+
+                    <div class="section"><hr>
+                            <div class="container">
+                              <div class="row">
+                                <div class="col-md-8 ml-auto mr-auto">
+                                  <h4 class="description text-left text-light">scramp is a search engine that accerelate the innovation by giving you a powerful tool to come up with a great idea.<br>
+                                  scramp finds you near, the opposite, or random results from your search. A creativity comes from an unexpected match of knowledges. <br>
+                                  sclamp search engine gives you that opportunity to be more creative and innovative.<br>
+                              *sclamp is a made-up word from sclap (creating from zero) and lamp( image of moment idea comes up).</h4>
+                                </div>
+                                <div class="container text-center">
+                                  <a href="{% url 'about' %}"><button type="button" class="btn btn-link"><b class="text-warning lead"><u>more about sclamp</u></b></button></a>
+                                </div>
+                              </div>
+                              
+                            </div>
+                          </div>
+        </div>
+ 
+{% endblock %}

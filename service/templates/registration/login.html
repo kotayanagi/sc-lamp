@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+
+{% block main %}
+<br><br><br>
+<h4 class="text-light text-center">Log In to Your Account</h4><br>
+<div class="container text-light mt-5">
+  <h2>Login</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-info rounded py-2 px-4 mt-3"><b class="lead">Log In !</b></button>
+  </form>
+</div>
+<br><br>
+  <div class="container text-light my-5">
+    <h4>Forgot your Password??</h4>
+  
+  <a href="{% url 'password_reset' %}"><button type="button" class="btn btn-secondary p-1"><h6 class="text-dark">Reset Password</h6></button></a>
+</div>
+<br>
+<br>
+{% endblock %}

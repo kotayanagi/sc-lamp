@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block main %}
+<br><br><br>
+<h4 class="text-light text-center">Quit Member and Delete Your Account</h4><br>
+<div class="container text-light mt-5">
+  <h2>Quit</h2>
+  <form method="POST" action="{% url 'cu' %}">
+    {% csrf_token %}
+    <label for="#reason">Could tell me why did you decide to quit our member?</label>
+    <input type="text" id="reason">
+    <button name="quit" type="submit" class="btn btn-warning rounded py-2 px-4 mt-3"><b class="lead">Quit Member !</b></button><br>
+    <a href="/"><button type="button" class="btn btn-info rounded py-2 p2-4 mt-3"><b class="">Changed My Mind!</b></button></a>
+  </form>
+</div>
+<br>
+<br>
+{% endblock %}

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-96608225-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-96608225-3');
+</script>
+
+    <meta charset="UTF-8">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <link rel="icon" type="image/png" href="{% static 'assets/img/favicon.png' %}">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+    <meta name=”keywords” content="euraka,aha-moment,idea,innocation,news,search-engine,sclamp,sc-lamp,lamp">
+    <meta name=”description” content=”sclamp is a unique search engine that shows the opposite results of the normal search engine such as google.”>
+    <title>sclamp -unique search engine driving innovation -</title>
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link rel="stylesheet" type=text/css href="{% static 'assets/css/material-kit.css' %}">
+    <link rel="stylesheet" type=text/css href="{% static 'assets/css/style.css' %}">
+   
+</head>
+<body {% if request.path != '/' %}style="background-color:rgb(78, 78, 78);"{% endif %}>
+
+{% if request.path == '/' %}
+<nav class="navbar navbar-transparent navbar-absolute navbar-expand-lg mb-0">
+   
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-translate w-100" style="position:relative;">
+        <a class="navbar-brand text-warning" href="/">sclamp</a>
+        {% if user.is_authenticated %}
+        <span class="bg bg-light p-1 rounded" style="position:absolute;bottom:-32px;left:-1px;"><b class="text-dark">user: </b><b class="text-warning">{{ user.username }}</b></span>
+        {% endif %}
+      
+      <div class="text-light ml-auto mr-1 align-middle d-inline-block float-right">
+          {% if user.is_authenticated %}
+          <ul class="d-inline-block navbar-right text-dark mb-0 p-0">
+         
+          
+              <!-- <li class="d-inline-block text-left">
+                  <a href="#pablo" class="nav-link">
+                    mypage
+                  </a>
+                </li> -->
+                
+                
+                <a href="{% url 'mypage' %}"><button class="btn btn-info rounded p-2 mx-1"><b class="text-light">My Page</b></button></a>
+                <a href="{% url 'logout' %}"><button class="btn btn-warning rounded p-2 mx-1"><b class="text-light">Log Out</b></button></a>
+            </ul>
+
+        {% else %}
+        <ul class="d-inline-block navbar-right text-dark mb-0 p-0">
+         
+          
+          <!-- <li class="d-inline-block text-left">
+              <a href="#pablo" class="nav-link">
+                mypage
+              </a>
+            </li> -->
+            <a href="{% url 'login' %}"><button class="btn btn-info rounded p-2 mx-1"><b class="text-light lead">Log In</b></button></a>
+            <a href="{% url 'signup' %}"><button class="btn btn-warning rounded p-2 mx-1"><b class="text-light lead">Sign Up</b></button></a>
+        </ul>
+        
+        {% endif %}
+          <!--<li class="nav-item text-dark">
+            <a href="https://www.facebook.com/CreativeTim" class="nav-link">
+              <i class="fa fa-facebook-square"></i>
+            </a>
+          </li>-->
+        </div>
+      </div>
+    </div>
+  </nav>
+          
+{% else %}
+<style type="text/css">
+</style>
+<nav class="navbar navbar-transparent navbar-expand-lg mb-1 border-bottom border-light">
+  {% if user.is_authenticated %}
+  <span class="bg bg-light p-1 rounded" style="position:absolute;bottom:-41px;left:32px;"><b class="text-dark">user: </b><b class="text-warning">{{ user.username }}</b></span>
+  {% endif %}
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-translate w-100">
+            <a class="navbar-brand text-warning" href="/">sclamp</a>
+            <a class="navbar-brand text-warning" href="{% url 'about' %}">About</a>
+            
+          
+          <div class="text-light ml-auto mr-1 align-middle d-inline-block float-right">
+              {% if user.is_authenticated %}
+              <ul class="d-inline-block navbar-right text-dark mb-0 p-0">
+             
+              
+                  <!-- <li class="d-inline-block text-left">
+                      <a href="#pablo" class="nav-link">
+                        mypage
+                      </a>
+                    </li> -->
+
+                    <a href="{% url 'mypage' %}"><button class="btn btn-info rounded p-2"><b class="text-light">My Page</b></button></a>
+                    <a href="{% url 'logout' %}"><button class="btn btn-warning rounded p-2 ml-3"><b class="text-light">Log Out</b></button></a>
+                </ul>
+            {% else %}
+            <ul class="d-inline-block navbar-right text-dark mb-0 p-0">
+             
+              
+              <!-- <li class="d-inline-block text-left">
+                  <a href="#pablo" class="nav-link">
+                    mypage
+                  </a>
+                </li> -->
+        
+                <a href="{% url 'login' %}"><button class="btn btn-info rounded p-2 mx-1"><b class="text-light lead">Log In</b></button></a>
+                <a href="{% url 'signup' %}"><button class="btn btn-warning rounded p-2 mx-1"><b class="text-light lead">Sign Up</b></button></a>
+            </ul>
+            {% endif %}
+              <!--<li class="nav-item text-dark">
+                <a href="https://www.facebook.com/CreativeTim" class="nav-link">
+                  <i class="fa fa-facebook-square"></i>
+                </a>
+              </li>-->
+            </div>
+          </div>
+        </div>
+      </nav>
+        <nav>
+        <div class="col-md-12 bg bg-light mx-auto d-block pt-3 text-center fixed-bottom">
+                
+                    <div class="container d-inline-block">
+                      <div class="w-100 d-inline-block">
+                        <div class="text-center">
+                              <form method="POST" action="{% url 'result' %}" enctype="multipart/form-data">
+                                  {% csrf_token %}
+                                      <input type="text" name="keywords" class="rounded w-75 p-1 d-inline-block" placeholder="search any words you like">
+                                      <button type="submit" class="rounded text-warning border border-light bg bg-warning btn align-middle p-2" style="margin:-2px;"><i class="material-icons align-middle" style="color:rgb(90, 90, 90);">search</i></button>
+                                  </form>
+                        </div>
+                      </div>
+                    </div>
+          </div>
+        </nav>
+        
+       
+
+
+{% endif %}
+
+{% block main %}
+{% endblock %}
+
+<footer class="bg-dark text-center mb-5">
+  
+    <button type='button' class="text-left mb-3 ml-3 border border-grey btn btn-primary rounded px-1 dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <b class="text-light">share<br>sclamp<i class="material-icons p-1 text-light">share</i> </b></button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://sc-lamp.com">Facebook</a>
+            <a class="dropdown-item" target="_blank" href="https://twitter.com/intent/tweet?url=http%3A//sc-lamp.com">Twitter</a>
+          </div>
+  
+        
+        <div class="container text-light">
+            <span>2019 lamp-on all rights reserved </span>| <a href="{% url 'home' %}"><span class="text-warning">Contact Us</span></a>
+            {% if user.is_authenticated %}| <a href="{% url 'quit' %}"><span class="text-warning">Quit Member</span></a>{% endif %}
+        </div>
+        
+       <br>
+    <br><br><br>
+</footer>
+
+
+
+
+<!--   Core JS Files   -->
+<script src="{% static 'assets/js/core/jquery.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'assets/js/core/popper.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'assets/js/core/bootstrap-material-design.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'assets/js/plugins/moment.min.js' %}"></script>
+<!-- Plugins for presentation and navigation  -->
+<script src="{% static 'assets/demo/modernizr.js' %}" type="text/javascript"></script>
+<script src="{% static 'assets/demo/vertical-nav.js' %}" type="text/javascript"></script>
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
+<script src="{% static 'assets/js/material-kit.js' %}" type="text/javascript"></script>
+</body>
+</html>

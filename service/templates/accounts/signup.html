@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<br><br><br>
+<h4 class="text-light text-center">Sign Up Your Account</h4><br>
+<div class="container text-light my-5">
+  <h2>Sign up</h2>
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <p class="text-light">
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% if field.help_text %}
+          <small class="text-light">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <p class="text-light">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+    <button type="submit" class="btn btn-warning rounded px-4 py-2 mt-3"><b class="lead">Sign up</b></button>
+  </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+<div class="main main-raised mt-5 border border-warning">
+<header class="title text-center my-5 p-3">
+    <h2 class="w-50 mx-auto border border-warning text-light rounded" style="background: rgb(78,78,78);">About sclamp</h2>
+</header>
+
+<hr><br>
+
+        
+                <div class="container">
+    <div class="row mx-auto my-4">
+        <div class="col-md-5 ml-auto mr-1">
+            <img src="{% static 'assets/img/search.jpg' %}" alt="" class="w-100 mb-3 border border-warning rounded">
+        </div>
+        <div class="col-md-6 ml-auto mr-2">
+            <h5><b>sclamp is unordinary search engine that drives Aha! moments happen. <br>
+                Aha! moment is also called as Eureka moment, that is when a great idea comes up.<br>
+            When you search words, it won't search the way it should,<br>
+        on the other hands, it searchs the words in the opposite directions or other directions.</b></h5>
+        </div>
+    </div>
+    </div>
+    <br><hr><br>
+    
+    
+    
+    <div class="row mx-auto my-4">
+            <div class="col-md-5 ml-auto mr-1">
+                    <img src="{% static 'assets/img/good.png' %}" alt="" class="w-100 mb-3 rounded border border-warning">
+                </div>
+            <div class="col-md-6 ml-auto mr-2">
+                <h5><b>for example, when you search the word 'good',<br>
+                it searchs 'bad' or 'acceptable' or 'great'. <br>
+            This search engine tries to find the opposite, near, close results from the words(ideally one word) you type.<br>
+        if it does not get any creative results, it alteratively gives you the usual search engine result.</b></h5>
+            </div>
+        </div>
+    
+        <br><hr><br>
+        
+                
+        <div class="row mx-auto my-4">
+                <div class="col-md-5 ml-auto mr-1">
+                    <img src="{% static 'assets/img/idea.jpg' %}" alt="" class="w-100 mb-3 rounded border border-warning">
+                </div>
+                <div class="col-md-6 ml-auto mr-2">
+                    <h5><b>the moment a great idea comes up in one's brain is often <br>
+                        when getting to know, experience, or learn two or more really different things that he or she never expected.<br>
+                    this search engine gives you chances to make that happen <br>
+                    by meeting many unexpected news and pages.</b></h5>
+                </div>
+                </div>
+                
+                
+                <br><hr><br>   
+                
+                
+            <div class="row mx-auto my-4">
+                    <div class="col-md-5 ml-auto mr-1">
+                            <img src="{% static 'assets/img/mindmap.jpg' %}" alt="" class="w-100 mb-3 rounded border border-warning">
+                        </div>
+                    <div class="col-md-6 ml-auto mr-2">
+                        <h5><b>the way to get the best result from the search is,<br><br>
+                        <b class="text-warning">-FIRST</b>, sign up your account for 1 minute(with only your name and email address)<br>
+                        <b class="text-warning">-SECOND</b>, search the words that is related to a topic you are trying to come up with an idea<br>
+                        <b class="text-warning">-THIRD</b>, on each searching, save searched items that give you a good knowledge after reading news/page.<br>
+                        <b class="text-warning">-FOURTH</b>, occasionally, visit your account page and read through the saved items and put those summary contents in your brain_map note.</b></h5>
+                    </div>
+                    
+                </div>
+                <div class="container my-4">
+                <h4>the service is currently under development and DEMO&Trial Phase. <br>
+                So, except a simple word, the opposite result won't show and the ordinary results are shown.<br>
+            We will nortify as soon as the innovative AI system is introduced and the real opposite result starts showing up!!
+        <br>We thank you for your understanding and cooperation.</h4>
+    </div>
+                </div>
+                
+                
+                <br><br>
+                <div class="mt-5">
+                        
+        <div class="container text-center pb-5">
+            <h2 class="my-4"><b class="text-light">Now, let's start searching !</b></h2>
+                    
+                    <div>
+                        <a href="{% url 'login' %}"><button class="btn btn-info w-25 rounded p-2 m-2"><b class="text-light lead">Log In</b></button></a>
+                        <a href="{% url 'signup' %}"><button class="w-25 btn btn-warning rounded p-2 m-2"><b class="text-light lead">Sign Up</b></button></a>
+                    </div>
+                  </div>
+                  </div>
+        </div>
+        <br><br>
+</div>
+        
+</div>
+{% endblock %}

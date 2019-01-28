@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+
+<div class="container text-center">
+        <h2 class="border-bottom border-grey text-light"><small class="text-light">News</small></h2><i class="material-icons text-light">grain</i>
+    </div><br>
+    <div class="container">
+    <div class="row">
+        
+        {% for n in news %}
+            <div class="col-md-4 px-2">
+                    <a href="{{ n.1 }}" target="_blank"><div class="card card-testimonial card-hover" style="border:2px solid rgb(255, 230, 0);">
+                            <div class="card-body p-2 align-middle" style="height:240px;"><br>
+                                <u><span class="">{{ n.2 | truncatechars:"20" }} </span></u>
+                                <span style="position:absolute;left:10px;top:5px;color:rgb(78, 78, 78);"><b> <i class="material-icons rounded-circle" style="border:2px solid rgb(255,230,0);background:rgb(78, 78, 78);">fiber_manual_record</i> </b></span>
+                                <div class="card-description text-left m-3"><h4 class="text-dark mark"><b>{{ n.0 }}</b></h4></div>
+                            </div>
+                        </div></a>
+                        {% if user.is_authenticated %}
+                            <form method="POST" enctype="multipart/form-data" action="{% url 'mypage' %}" target="_blank">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{ n.0 }}" name="n_title">
+                                <input type="hidden" value="{{ n.1 }}" name="n_link">
+                                <input type="hidden" value="{{ n.4 }}" name="n_domain">
+                                <button name="n_save" type='submit' style="position:absolute;right:18px;bottom:30px;" class="btn btn-warning rounded p-2 border border-grey"><b class="text-light p-1">save<i class="material-icons p-1 text-light">present_to_all</i> </b></button>                       
+                                </form>
+                                <button type='button' style="position:absolute;right:105px;bottom:30px;;" class="border border-grey btn btn-info rounded p-2 dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <b class="text-light p-1">share<i class="material-icons p-1 text-light">share</i> </b></button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ n.1 }}">Facebook</a>
+                                            <a class="dropdown-item" target="_blank" href="https://twitter.com/intent/tweet?url=http%3A//{{ n.1 }}">Twitter</a>
+                                          </div>
+                                
+                            
+                            {% else %}
+                            <button type='button' style="position:absolute;right:18px;bottom:30px;;" class="border border-grey btn btn-info rounded p-2 dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <b class="text-light p-1">share<i class="material-icons p-1 text-light">share</i> </b></button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ n.1 }}">Facebook</a>
+                                        <a class="dropdown-item" target="_blank" href="https://twitter.com/intent/tweet?url=http%3A//{{ n.1 }}">Twitter</a>
+                                      </div>
+                            <!-- <a href="#"><span style="position:absolute;right:15px;bottom:36px;" class="border border-grey bg bg-danger rounded"><b class="text-light p-1">saved<i class="material-icons p-1 text-light">done</i> </b></span></a> -->
+                            {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+    <br>
+        <div class="container text-center">
+                <h2 class="border-bottom border-grey text-light"><small class="text-light">Pages</small></h2><i class="material-icons text-light">grain</i>
+            </div><br>
+            <div class="container">
+            <div class="row">
+                {% for p in page %}
+                <div class="col-md-4 px-2">
+                        <a href="{{ p.1 }}" target="_blank"><div class="card card-testimonial card-hover" style="border:2px solid rgb(255, 208, 0);">
+                                <div class="card-body p-2 align-middle" style="height:240px;"><br>
+                                    <u><span class="">{{ p.2 | truncatechars:"20" }}</span></u>
+                                    <span style="position:absolute;left:10px;top:5px;color:rgb(78, 78, 78);"><b> <i class="material-icons rounded-circle" style="border:2px solid rgb(255,208,0);background:rgb(78, 78, 78);">fiber_manual_record</i> </b></span>
+                                    <div class="card-description text-left m-3"><h4 class="text-dark mark"><b>{{ p.0 }}</b></h4></div>
+                                    
+                                </div>
+                            </div></a>                            
+                            {% if user.is_authenticated %}
+                            <form method="POST" enctype="multipart/form-data" action="{% url 'mypage' %}" target="_blank">
+                                {% csrf_token %}
+                                <input type="hidden" value="{{ p.0 }}" name="p_title">
+                                <input type="hidden" value="{{ p.1 }}" name="p_link">
+                                <input type="hidden" value="{{ p.2 }}" name="p_domain">
+                                
+                                <button name="p_save" type='submit' style="position:absolute;right:18px;bottom:30px;" class="btn btn-warning rounded p-2 border border-grey"><b class="text-light p-1">save<i class="material-icons p-1 text-light">present_to_all</i> </b></button>                       
+                                </form>
+                                <button type='button' style="position:absolute;right:105px;bottom:30px;;" class="border border-grey btn btn-info rounded p-2 dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <b class="text-light p-1">share<i class="material-icons p-1 text-light">share</i> </b></button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ p.1 }}">Facebook</a>
+                                            <a class="dropdown-item" target="_blank" href="https://twitter.com/intent/tweet?url=http%3A//{{ p.1 }}">Twitter</a>
+                                          </div>
+                                
+                            
+                            {% else %}
+                            <button type='button' style="position:absolute;right:18px;bottom:30px;;" class="border border-grey btn btn-info rounded p-2 dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <b class="text-light p-1">share<i class="material-icons p-1 text-light">share</i> </b></button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ n.1 }}">Facebook</a>
+                                        <a class="dropdown-item" target="_blank" href="https://twitter.com/intent/tweet?url=http%3A//{{ n.1 }}">Twitter</a>
+                                      </div>
+                            <!-- <a href="#"><span style="position:absolute;right:15px;bottom:36px;" class="border border-grey bg bg-danger rounded"><b class="text-light p-1">saved<i class="material-icons p-1 text-light">done</i> </b></span></a> -->
+                            {% endif %}
+                </div>
+                    {% endfor %}
+                  </div>
+                </div>
+            
+{% endblock %}
